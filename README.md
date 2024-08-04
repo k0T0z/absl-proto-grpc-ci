@@ -12,4 +12,4 @@ Assalamu'alaikum, as the Continuous Integration (CI) system, I've verified that 
 
 | System | Status |
 |----------|--------|
-| Ubuntu |  |
+| Ubuntu | ![CI Status](https://github.com/k0T0z/absl-proto-grpc-ci/actions/workflows/linux_ubuntu_static_lib_release_builds.yml/badge.svg) |
