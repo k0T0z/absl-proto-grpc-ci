@@ -27,7 +27,7 @@ jobs:
       run: |
         bash ./update_versions.sh
         git config user.name "Saif Kandil"
-        git config user.email "$CI_COMMIT_EMAIL"
+        git config user.email "${{ secrets.CI_COMMIT_EMAIL }}"
         git add README.md
         git commit -s -m "Update working versions in README [skip ci]"
         git push origin master
