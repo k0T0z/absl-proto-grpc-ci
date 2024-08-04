@@ -16,14 +16,14 @@ mkdir build && cd build
 
 # Configure and build
 cmake .. -DgRPC_INSTALL=ON \
-         -DCMAKE_BUILD_TYPE=Release 
-         -DgRPC_ABSL_PROVIDER=package 
-         -DgRPC_CARES_PROVIDER=package 
-         -DgRPC_PROTOBUF_PROVIDER=package 
-         -DgRPC_RE2_PROVIDER=package 
-         -DgRPC_SSL_PROVIDER=package 
-         -DgRPC_ZLIB_PROVIDER=package 
-         -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/absl-k0t0z-lib;$GITHUB_WORKSPACE/proto-k0t0z-lib"
+         -DCMAKE_BUILD_TYPE=Release \
+         -DgRPC_ABSL_PROVIDER=package \
+         -DgRPC_CARES_PROVIDER=package \
+         -DgRPC_PROTOBUF_PROVIDER=package \
+         -DgRPC_RE2_PROVIDER=package \
+         -DgRPC_SSL_PROVIDER=package \
+         -DgRPC_ZLIB_PROVIDER=package \
+         -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/absl-k0t0z-lib;$GITHUB_WORKSPACE/proto-k0t0z-lib" \
          -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/grpc-k0t0z-lib
 
 make -j$(nproc)
