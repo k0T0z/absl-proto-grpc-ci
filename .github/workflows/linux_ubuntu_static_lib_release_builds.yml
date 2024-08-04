@@ -21,3 +21,13 @@ jobs:
 
     - name: Build gRPC
       run: bash ./linux-scripts/ubuntu/build_grpc.sh
+
+    - name: Update README
+      if: success()
+      run: |
+        bash ./update_versions.sh
+        git config user.name "Saif Kandil"
+        git config user.email "$CI_COMMIT_EMAIL"
+        git add README.md
+        git commit -s -m "Update working versions in README [skip ci]"
+        git push origin master
