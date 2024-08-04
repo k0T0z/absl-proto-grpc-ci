@@ -1,0 +1,23 @@
+name: Linux Static Lib Release Builds
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight UTC
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build Abseil
+      run: bash ./build_absl.sh
+
+    - name: Build Protobuf
+      run: bash ./build_protobuf.sh
+
+    - name: Build gRPC
+      run: bash ./build_grpc.sh
