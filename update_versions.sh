@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit with a non-zero value if any command fails.
+set -e
+
 # Function to get the latest tag of a repo
 get_latest_tag() {
     cd "$1"
