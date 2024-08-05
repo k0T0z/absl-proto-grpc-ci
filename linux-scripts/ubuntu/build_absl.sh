@@ -6,8 +6,14 @@ set -e
 # Create custom directory
 mkdir -p $GITHUB_WORKSPACE/absl-k0t0z-lib
 
+# Define the repository URL
+REPO_URL="https://github.com/abseil/abseil-cpp.git"
+
+# Get the latest tag from the remote repository
+LATEST_TAG=$(git ls-remote --tags $REPO_URL | awk -F'/' '{print $NF}' | sort -V | tail -n1)
+
 # Clone Abseil
-git clone --depth 1 -b 20240722.0 https://github.com/abseil/abseil-cpp.git
+git clone --depth 1 -b $LATEST_TAG $REPO_URL
 
 cd abseil-cpp
 
