@@ -4,9 +4,10 @@
 > Only the CI can modify the compatible versions.
 
 Assalamu'alaikum, as the Continuous Integration (CI) system, I've verified that the following versions are compatible and functioning correctly:
- - Absl: 
- - Protobuf: 
- - gRPC: 
+
+ - Absl: 20240722.0
+ - Protobuf: v3.27.3
+ - gRPC: v1.66.0-pre2
 
 ## Static Lib Status
 
