@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Get the dependencies.
-sudo apt-get install build-essential autoconf libtool pkg-config
-
 # Create custom directory
 mkdir -p $GITHUB_WORKSPACE/grpc-k0t0z-lib
 
