@@ -6,8 +6,14 @@ set -e
 # Create custom directory
 mkdir -p $GITHUB_WORKSPACE/proto-k0t0z-lib
 
+# Define the repository URL
+REPO_URL="https://github.com/protocolbuffers/protobuf.git"
+
+# Get the latest tag from the remote repository
+LATEST_TAG=$(git ls-remote --tags $REPO_URL | awk -F'/' '{print $NF}' | sort -V | tail -n1)
+
 # Clone Abseil
-git clone --depth 1 -b v27.3 https://github.com/protocolbuffers/protobuf.git
+git clone --depth 1 -b $LATEST_TAG $REPO_URL
 
 cd protobuf
 
