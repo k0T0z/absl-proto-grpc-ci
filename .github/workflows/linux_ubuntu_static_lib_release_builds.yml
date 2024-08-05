@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+          token: ${{ secrets.PAT }}
 
     - name: Run dependency installation script
       run: | 
@@ -41,7 +43,7 @@ jobs:
       if: success()
       run: |
         bash ./update_versions.sh
-        git config user.name "Saif Kandil"
+        git config user.name "CI"
         git config user.email "${{ secrets.CI_COMMIT_EMAIL }}"
         git add README.md
         git commit -s -m "Update working versions in README [skip ci]"
