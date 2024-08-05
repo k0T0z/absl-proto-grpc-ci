@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit with a non-zero value if any command fails.
+set -e
+
 # Create custom directory
 mkdir -p $GITHUB_WORKSPACE/proto-k0t0z-lib
 
