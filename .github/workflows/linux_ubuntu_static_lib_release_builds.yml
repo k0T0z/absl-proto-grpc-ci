@@ -18,16 +18,24 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run dependency installation script
-      run: ./install_dependencies.sh
+      run: | 
+        chmod +x install_dependencies.sh
+        bash ./install_dependencies.sh
 
     - name: Build Abseil
-      run: bash ./linux-scripts/ubuntu/build_absl.sh
+      run: |
+        chmod +x build_absl.sh
+        bash ./linux-scripts/ubuntu/build_absl.sh
 
     - name: Build Protobuf
-      run: bash ./linux-scripts/ubuntu/build_protobuf.sh
+      run: |
+        chmod +x build_protobuf.sh
+        bash ./linux-scripts/ubuntu/build_protobuf.sh
 
     - name: Build gRPC
-      run: bash ./linux-scripts/ubuntu/build_grpc.sh
+      run: |
+        chmod +x build_grpc.sh
+        bash ./linux-scripts/ubuntu/build_grpc.sh
 
     - name: Update README
       if: success()
