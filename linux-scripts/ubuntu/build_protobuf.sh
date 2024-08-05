@@ -15,7 +15,7 @@ git submodule update --init --recursive
 mkdir build && cd build
 
 # Configure and build
-cmake .. -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_ABSL_PROVIDER=package -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/absl-k0t0z-lib -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/proto-k0t0z-lib
+cmake .. -Dprotobuf_BUILD_TESTS=OFF -Dprotobuf_ABSL_PROVIDER=package -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/absl-k0t0z-lib -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/proto-k0t0z-lib -Dprotobuf_BUILD_SHARED_LIBS=OFF
 make -j$(nproc)
 
 # Install
