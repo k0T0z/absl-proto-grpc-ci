@@ -17,6 +17,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Run dependency installation script
+      run: ./install_dependencies.sh
+
     - name: Build Abseil
       run: bash ./linux-scripts/ubuntu/build_absl.sh
 
