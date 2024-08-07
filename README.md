@@ -19,4 +19,9 @@ Latest check: 2024-08-07 10:32:04
 | System | Status |
 |----------|--------|
 | Ubuntu | ![CI Status](https://github.com/k0T0z/absl-proto-grpc-ci/actions/workflows/linux_ubuntu_static_lib_release_builds.yml/badge.svg) |
+
+## Shared Lib Status
+
+| System | Status |
+|----------|--------|
 | Ubuntu | ![CI Status](https://github.com/k0T0z/absl-proto-grpc-ci/actions/workflows/linux_ubuntu_shared_lib_release_builds.yml/badge.svg) |
