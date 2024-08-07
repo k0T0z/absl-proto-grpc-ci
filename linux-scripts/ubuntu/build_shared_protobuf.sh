@@ -32,13 +32,12 @@ cmake .. -Dprotobuf_BUILD_TESTS=OFF \
          -Dprotobuf_ABSL_PROVIDER=package \
          -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/absl-k0t0z-lib \
          -DCMAKE_BUILD_TYPE=Release \
-         -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/proto-k0t0z-lib \
          -Dprotobuf_BUILD_SHARED_LIBS=ON
 
 make -j$(nproc)
 
 # Install
-make install
+sudo make install
 
 # Go back to the original directory
 cd $GITHUB_WORKSPACE
