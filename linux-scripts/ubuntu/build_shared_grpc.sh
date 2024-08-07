@@ -36,8 +36,7 @@ cmake .. -DgRPC_INSTALL=ON \
          -DgRPC_RE2_PROVIDER=module \
          -DgRPC_SSL_PROVIDER=module \
          -DgRPC_ZLIB_PROVIDER=module \
-         -DBUILD_SHARED_LIBS=ON \
-         -DCMAKE_PREFIX_PATH="$GITHUB_WORKSPACE/absl-k0t0z-lib;$GITHUB_WORKSPACE/proto-k0t0z-lib"
+         -DBUILD_SHARED_LIBS=ON
 
 make -j$(nproc)
 
