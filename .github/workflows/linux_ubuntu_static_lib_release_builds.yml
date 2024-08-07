@@ -42,6 +42,7 @@ jobs:
     - name: Update README
       if: success()
       run: |
+        chmod +x update_versions.sh
         bash ./update_versions.sh
         git config user.name "CI"
         git config user.email "74428638+k0T0z@users.noreply.github.com"
