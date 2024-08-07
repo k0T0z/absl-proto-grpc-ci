@@ -26,9 +26,17 @@ jobs:
 
     - name: Fetch latest tags
       run: |
-        echo "ABSL_LATEST_TAG=$(git ls-remote --tags https://github.com/abseil/abseil-cpp.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
-        echo "PROTOBUF_LATEST_TAG=$(git ls-remote --tags https://github.com/protocolbuffers/protobuf.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
-        echo "GRPC_LATEST_TAG=$(git ls-remote --tags https://github.com/grpc/grpc.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
+        ABSL_LATEST_TAG=$(git ls-remote --tags https://github.com/abseil/abseil-cpp.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+        PROTOBUF_LATEST_TAG=$(git ls-remote --tags https://github.com/protocolbuffers/protobuf.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+        GRPC_LATEST_TAG=$(git ls-remote --tags https://github.com/grpc/grpc.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+
+        echo "ABSL_LATEST_TAG=$ABSL_LATEST_TAG" >> $GITHUB_ENV
+        echo "PROTOBUF_LATEST_TAG=$PROTOBUF_LATEST_TAG" >> $GITHUB_ENV
+        echo "GRPC_LATEST_TAG=$GRPC_LATEST_TAG" >> $GITHUB_ENV
+
+        echo "ABSL_LATEST_TAG: $ABSL_LATEST_TAG"
+        echo "PROTOBUF_LATEST_TAG: $PROTOBUF_LATEST_TAG"
+        echo "GRPC_LATEST_TAG: $GRPC_LATEST_TAG"
 
     - name: Build Abseil
       run: |
