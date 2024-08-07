@@ -33,13 +33,12 @@ cmake .. -DABSL_PROPAGATE_CXX_STD=ON \
          -DABSL_ENABLE_INSTALL=ON \
          -DBUILD_SHARED_LIBS=ON \
          -DABSL_BUILD_MONOLITHIC_SHARED_LIBS=ON \
-         -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/absl-k0t0z-lib \
          -DCMAKE_MODULE_LINKER_FLAGS="-Wl,--no-undefined"
 
 make -j$(nproc)
 
 # Install
-make install
+sudo make install
 
 # Go back to the original directory
 cd $GITHUB_WORKSPACE
