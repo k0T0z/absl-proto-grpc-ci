@@ -24,27 +24,33 @@ jobs:
         chmod +x install_dependencies.sh
         bash ./install_dependencies.sh
 
+    - name: Fetch latest tags
+      run: |
+        echo "ABSL_LATEST_TAG=$(git ls-remote --tags https://github.com/abseil/abseil-cpp.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
+        echo "PROTOBUF_LATEST_TAG=$(git ls-remote --tags https://github.com/protocolbuffers/protobuf.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
+        echo "GRPC_LATEST_TAG=$(git ls-remote --tags https://github.com/grpc/grpc.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')" >> $GITHUB_ENV
+
     - name: Build Abseil
       run: |
         chmod +x linux-scripts/ubuntu/build_absl.sh
-        bash ./linux-scripts/ubuntu/build_absl.sh
+        bash ./linux-scripts/ubuntu/build_absl.sh $ABSL_LATEST_TAG
 
     - name: Build Protobuf
       run: |
         chmod +x linux-scripts/ubuntu/build_protobuf.sh
-        bash ./linux-scripts/ubuntu/build_protobuf.sh
+        bash ./linux-scripts/ubuntu/build_protobuf.sh $PROTOBUF_LATEST_TAG
 
     - name: Build gRPC
       run: |
         chmod +x linux-scripts/ubuntu/build_grpc.sh
-        bash ./linux-scripts/ubuntu/build_grpc.sh
+        bash ./linux-scripts/ubuntu/build_grpc.sh $GRPC_LATEST_TAG
 
     - name: Update README
       if: success()
       run: |
         chmod +x update_versions.sh
-        bash ./update_versions.sh
-        git config user.name "CI"
+        bash ./update_versions.sh $ABSL_LATEST_TAG $PROTOBUF_LATEST_TAG $GRPC_LATEST_TAG
+        git config user.name "k0T0z's CI"
         git config user.email "74428638+k0T0z@users.noreply.github.com"
         git add README.md
         git commit -s -m "Update working versions in README [skip ci]"
