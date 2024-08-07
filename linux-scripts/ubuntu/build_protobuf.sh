@@ -3,14 +3,18 @@
 # Exit with a non-zero value if any command fails.
 set -e
 
+# Check if a tag was provided
+if [ -z "$1" ]; then
+  echo "No tag provided. Usage: $0 <tag>"
+  exit 1
+fi
+
 # Create custom directory
 mkdir -p $GITHUB_WORKSPACE/proto-k0t0z-lib
 
 # Define the repository URL
 REPO_URL="https://github.com/protocolbuffers/protobuf.git"
-
-# Get the latest tag from the remote repository
-LATEST_TAG=$(git ls-remote --tags $REPO_URL | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+LATEST_TAG=$1
 
 # Clone Abseil
 git clone --depth 1 -b $LATEST_TAG $REPO_URL
