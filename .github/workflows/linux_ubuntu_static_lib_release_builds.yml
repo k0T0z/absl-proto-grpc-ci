@@ -2,7 +2,7 @@ name: Linux Ubuntu Static Lib Release Builds
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight UTC
+    - cron: '0 0 */5 * *'  # Runs at midnight (UTC) every 5 days
   workflow_dispatch: 
 
 concurrency:
