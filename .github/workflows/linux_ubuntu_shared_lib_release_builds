@@ -1,0 +1,63 @@
+name: Linux Ubuntu Shared Lib Release Builds
+
+on:
+  workflow_dispatch: 
+
+concurrency:
+  group: ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-ubuntu
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+          token: ${{ secrets.PAT }}
+
+    - name: Run dependency installation script
+      run: | 
+        chmod +x install_dependencies.sh
+        bash ./install_dependencies.sh
+
+    - name: Fetch latest tags
+      run: |
+        ABSL_LATEST_TAG=$(git ls-remote --tags https://github.com/abseil/abseil-cpp.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+        PROTOBUF_LATEST_TAG=$(git ls-remote --tags https://github.com/protocolbuffers/protobuf.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+        GRPC_LATEST_TAG=$(git ls-remote --tags https://github.com/grpc/grpc.git | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
+
+        echo "ABSL_LATEST_TAG=$ABSL_LATEST_TAG" >> $GITHUB_ENV
+        echo "PROTOBUF_LATEST_TAG=$PROTOBUF_LATEST_TAG" >> $GITHUB_ENV
+        echo "GRPC_LATEST_TAG=$GRPC_LATEST_TAG" >> $GITHUB_ENV
+
+        echo "ABSL_LATEST_TAG: $ABSL_LATEST_TAG"
+        echo "PROTOBUF_LATEST_TAG: $PROTOBUF_LATEST_TAG"
+        echo "GRPC_LATEST_TAG: $GRPC_LATEST_TAG"
+
+    - name: Build Abseil
+      run: |
+        chmod +x linux-scripts/ubuntu/build_shared_absl.sh
+        bash ./linux-scripts/ubuntu/build_shared_absl.sh $ABSL_LATEST_TAG
+
+    - name: Build Protobuf
+      run: |
+        chmod +x linux-scripts/ubuntu/build_shared_protobuf.sh
+        bash ./linux-scripts/ubuntu/build_shared_protobuf.sh $PROTOBUF_LATEST_TAG
+
+    - name: Build gRPC
+      run: |
+        chmod +x linux-scripts/ubuntu/build_shared_grpc.sh
+        bash ./linux-scripts/ubuntu/build_shared_grpc.sh $GRPC_LATEST_TAG
+
+#    - name: Update README
+#      if: success()
+#      run: |
+#        chmod +x update_versions.sh
+#        bash ./update_versions.sh $ABSL_LATEST_TAG $PROTOBUF_LATEST_TAG $GRPC_LATEST_TAG
+#        git config user.name "k0T0z's CI"
+#        git config user.email "74428638+k0T0z@users.noreply.github.com"
+#        git add README.md
+#        git commit -s -m "Update working versions in README [skip ci]"
+#        git push origin master
