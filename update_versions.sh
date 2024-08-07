@@ -3,24 +3,26 @@
 # Exit with a non-zero value if any command fails.
 set -e
 
-# Function to get the latest tag of a repo
-get_latest_tag() {
-    cd "$1"
-    git fetch --tags
-    LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
-    cd "$GITHUB_WORKSPACE"
-    echo "$LATEST_TAG"
-}
+# Check if the number of arguments is exactly 3
+if [ "$#" -ne 3 ]; then
+  echo "Error: Exactly 3 arguments are required."
+  echo "Usage: $0 <arg1> <arg2> <arg3>"
+  exit 1
+fi
 
 # Get the latest tags
-ABSL_VERSION=$(get_latest_tag "$GITHUB_WORKSPACE/abseil-cpp")
-PROTOBUF_VERSION=$(get_latest_tag "$GITHUB_WORKSPACE/protobuf")
-GRPC_VERSION=$(get_latest_tag "$GITHUB_WORKSPACE/grpc")
+ABSL_VERSION=$1
+PROTOBUF_VERSION=$2
+GRPC_VERSION=$3
+
+CURRENT_DATE_TIME=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Update README.md
 sed -i '/Assalamu'"'"'alaikum, as the Continuous Integration (CI) system, I'"'"'ve verified that the following versions are compatible and functioning correctly:/,/gRPC:/ c\
 Assalamu'"'"'alaikum, as the Continuous Integration (CI) system, I'"'"'ve verified that the following versions are compatible and functioning correctly:\
-\
+\n\
+Latest check: '"$CURRENT_DATE_TIME"'\n\
+\n\
  - Absl: '"$ABSL_VERSION"'\
  - Protobuf: '"$PROTOBUF_VERSION"'\
  - gRPC: '"$GRPC_VERSION"'' README.md
