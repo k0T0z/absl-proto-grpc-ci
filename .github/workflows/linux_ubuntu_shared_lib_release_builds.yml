@@ -1,6 +1,8 @@
 name: Linux Ubuntu Shared Lib Release Builds
 
 on:
+  schedule:
+    - cron: '0 0 */5 * *'  # Runs at midnight (UTC) every 5 days
   workflow_dispatch: 
 
 concurrency:
@@ -51,13 +53,13 @@ jobs:
         chmod +x linux-scripts/ubuntu/build_shared_grpc.sh
         bash ./linux-scripts/ubuntu/build_shared_grpc.sh $GRPC_LATEST_TAG
 
-#    - name: Update README
-#      if: success()
-#      run: |
-#        chmod +x update_versions.sh
-#        bash ./update_versions.sh $ABSL_LATEST_TAG $PROTOBUF_LATEST_TAG $GRPC_LATEST_TAG
-#        git config user.name "k0T0z's CI"
-#        git config user.email "74428638+k0T0z@users.noreply.github.com"
-#        git add README.md
-#        git commit -s -m "Update working versions in README [skip ci]"
-#        git push origin master
+    - name: Update README
+      if: success()
+      run: |
+        chmod +x update_versions.sh
+        bash ./update_versions.sh $ABSL_LATEST_TAG $PROTOBUF_LATEST_TAG $GRPC_LATEST_TAG
+        git config user.name "k0T0z's CI"
+        git config user.email "74428638+k0T0z@users.noreply.github.com"
+        git add README.md
+        git commit -s -m "Update working versions in README [skip ci]"
+        git push origin master
