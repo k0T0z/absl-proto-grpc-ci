@@ -10,7 +10,7 @@ mkdir -p $GITHUB_WORKSPACE/grpc-k0t0z-lib
 REPO_URL="https://github.com/grpc/grpc.git"
 
 # Get the latest tag from the remote repository
-LATEST_TAG=$(git ls-remote --tags $REPO_URL | awk -F'/' '{print $NF}' | sort -V | tail -n1)
+LATEST_TAG=$(git ls-remote --tags $REPO_URL | grep -o 'refs/tags/[^{}]*$' | sort -t '/' -k 3 -V | tail -n1 | awk -F/ '{print $3}')
 
 # Clone Abseil
 git clone --depth 1 -b $LATEST_TAG $REPO_URL
