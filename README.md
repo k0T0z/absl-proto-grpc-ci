@@ -1,6 +1,9 @@
 # [Abseil](https://github.com/abseil/abseil-cpp) - [Protocol Buffers](https://github.com/protocolbuffers/protobuf) - [gRPC](https://github.com/grpc/grpc) - CI
 
-> [!NOTE]  
+> [!NOTE]
+> This solution is a key component of a project developed during the Google Summer of Code 2024 program ([wYTZuQbA](https://summerofcode.withgoogle.com/programs/2024/projects/wYTZuQbA)) in collaboration with [The ENIGMA Team](https://github.com/enigma-dev).
+
+> [!NOTE]
 > Only the CI can modify the compatible versions.
 
 Assalamu'alaikum, as the Continuous Integration (CI) system, I've verified that the following versions are compatible and functioning correctly:
