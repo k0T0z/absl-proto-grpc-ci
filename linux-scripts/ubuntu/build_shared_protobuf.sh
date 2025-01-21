@@ -31,6 +31,7 @@ mkdir build && cd build
 cmake .. -Dprotobuf_BUILD_TESTS=OFF \
          -Dprotobuf_ABSL_PROVIDER=package \
          -DCMAKE_BUILD_TYPE=Release \
+         -DCMAKE_CXX_STANDARD=17 \
          -Dprotobuf_BUILD_SHARED_LIBS=ON
 
 make -j$(nproc)
