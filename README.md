@@ -9,12 +9,12 @@
 Assalamu'alaikum, as the Continuous Integration (CI) system, I've verified that the following versions are compatible and functioning correctly:
 
 
-Latest check: 2025-04-26 02:17:40
+Latest check: 2025-05-01 02:31:07
 
 
 
  - Absl: 20250127.1
- - Protobuf: v31.0-rc1
+ - Protobuf: v31.0-rc2
  - gRPC: v1.72.0-pre1
 
 ## Static Lib Status
