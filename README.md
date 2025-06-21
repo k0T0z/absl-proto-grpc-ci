@@ -9,11 +9,11 @@
 Assalamu'alaikum, as the Continuous Integration (CI) system, I've verified that the following versions are compatible and functioning correctly:
 
 
-Latest check: 2025-06-16 02:34:09
+Latest check: 2025-06-21 02:27:33
 
 
 
- - Absl: 20250512.0
+ - Absl: 20250512.1
  - Protobuf: v31.1
  - gRPC: v1.73.0-pre2
 
